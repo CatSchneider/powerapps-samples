@@ -1,0 +1,81 @@
+{
+  "ComponentIndexes": {},
+  "ControlUniqueIds": {
+    "App": 1,
+    "Button1": 14,
+    "Container1": 4,
+    "Container2": 6,
+    "Container3": 7,
+    "Container3_1": 10,
+    "Container4": 17,
+    "Gallery1": 15,
+    "galleryTemplate1": 16,
+    "Label1": 5,
+    "Label2": 8,
+    "Label2_1": 13,
+    "Label3": 18,
+    "Screen1": 3,
+    "TextInput1": 9,
+    "TextInput2": 19
+  },
+  "FunctionParamsInvariantScripts": {},
+  "FunctionParamsInvariantScriptsOnInstances": {},
+  "HeaderLastSavedDateTimeUTC": "08/14/2022 21:23:02",
+  "IsLegacyComponentAllowGlobalScopeCase": false,
+  "LocalConnectionIDReferences": {
+    "22423299-f114-418e-a579-7eee332b08f6": "\"/providers/microsoft.powerapps/apis/shared_office365users/connections/shared-office365user-f214615e-1a6f-4ecd-a74a-0be6466fcf07\"",
+    "54f330ba-d207-499c-a9e6-0c8edb143dcc": "\"/providers/microsoft.powerapps/apis/shared_logicflows/connections/715d26a614944b228551ddfb26c0a7a7-5ba19e7d9a0281ca\""
+  },
+  "LocalDatabaseReferencesAsEmpty": false,
+  "LocalResourceFileNames": {},
+  "LocalResourceRootPaths": {},
+  "OrderComponentMetadata": {},
+  "OrderComponentTemplate": {},
+  "OrderDataSource": {
+    "CustomGallerySample": 2,
+    "jsonObjDetails": 3,
+    "Office365Users": 0,
+    "PowerAppsJSONParser": 1
+  },
+  "OrderGroupControls": {},
+  "OrderPcfTemplate": {},
+  "OrderTemplate": {},
+  "OrderXMLTemplate": {
+    "button": 3,
+    "gallery": 4,
+    "groupContainer": 0,
+    "label": 1,
+    "text": 2
+  },
+  "PublishOrderIndices": {
+    "App": 0,
+    "Button1": 6,
+    "Container1": 0,
+    "Container2": 2,
+    "Container3": 3,
+    "Container3_1": 7,
+    "Container4": 10,
+    "Gallery1": 9,
+    "galleryTemplate1": 13,
+    "Label1": 1,
+    "Label2": 4,
+    "Label2_1": 8,
+    "Label3": 11,
+    "Screen1": 0,
+    "TextInput1": 5,
+    "TextInput2": 12
+  },
+  "ResourcesJsonIndices": {},
+  "RuleScreenIdWithoutScreen": {},
+  "TemplateVersions": {},
+  "VolatileProperties": {
+    "AnalysisLoadTime": 0.027062800000000001,
+    "ControlCount": {
+      "groupContainer": 1,
+      "label": 2,
+      "text": 1
+    },
+    "ErrorCount": 0
+  },
+  "WasLocalDatabaseReferencesEmpty": true
+}

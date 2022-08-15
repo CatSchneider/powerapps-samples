@@ -1,0 +1,219 @@
+Screen1 As screen:
+
+    Container1 As groupContainer.verticalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =20
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =Self.LayoutGap
+        PaddingLeft: =Self.LayoutGap
+        PaddingRight: =Self.LayoutGap
+        Width: =Parent.Width
+        ZIndex: =1
+
+        Label1 As label:
+            AlignInContainer: =AlignInContainer.Center
+            AutoHeight: =true
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(0, 18, 107, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingBottom: =Parent.LayoutGap
+            PaddingLeft: =Self.PaddingBottom
+            PaddingRight: =Self.PaddingBottom
+            PaddingTop: =Self.PaddingBottom
+            Text: ="Example JSON Parsing for Power Apps"
+            Tooltip: =Self.Text
+            Width: =Parent.Width
+            ZIndex: =1
+
+        Container2 As groupContainer.horizontalAutoLayoutContainer:
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutGap: =Parent.LayoutGap
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =Self.LayoutGap / Self.LayoutGap
+            PaddingLeft: =Self.PaddingBottom
+            PaddingRight: =Self.PaddingBottom
+            PaddingTop: =Self.PaddingBottom
+            ZIndex: =2
+
+            Container3 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =0
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =Parent.LayoutGap / 2
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =Self.LayoutGap / 2.5
+                PaddingLeft: =Self.PaddingBottom
+                PaddingRight: =Self.PaddingBottom
+                PaddingTop: =Self.PaddingBottom
+                ZIndex: =1
+
+                Label2 As label:
+                    AlignInContainer: =AlignInContainer.Center
+                    AutoHeight: =true
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(102, 113, 166, 1)
+                    PaddingBottom: =Parent.LayoutGap
+                    PaddingLeft: =Self.PaddingBottom
+                    PaddingRight: =Self.PaddingBottom
+                    PaddingTop: =Self.PaddingBottom
+                    Text: |-
+                        ="Example JSON string to parse:"
+                    Tooltip: =Self.Text
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                TextInput1 As text:
+                    AccessibleLabel: =Self.Text
+                    BorderThickness: =1
+                    Default: =userJSON
+                    FillPortions: =1
+                    FocusedBorderThickness: =Self.BorderThickness + 1
+                    HintText: ="Enter String of JSON to parse"
+                    Mode: =TextMode.MultiLine
+                    PaddingLeft: =5
+                    Size: =12
+                    Tooltip: =Self.Text
+                    VirtualKeyboardMode: =VirtualKeyboardMode.Text
+                    ZIndex: =2
+
+                Button1 As button:
+                    AlignInContainer: =AlignInContainer.Center
+                    FocusedBorderThickness: =Self.BorderThickness + 1
+                    OnSelect: |-
+                        =With({i:
+                            Substitute(Substitute(Substitute(Substitute(Substitute(
+                                PowerAppsJSONParser.Run(TextInput1.Text).rtnhtmltable
+                                ,"<td></td>", "<td>null</td>")
+                                ,"&#39;","'")
+                                ,"&amp;","&")
+                                ,"&quot;",Char(34))
+                                ,"&nbsp;"," ")
+                            },
+                            With({
+                                    cols: With({st: Find("<tr><th>", i) + 8, ed: Find("</th></tr>", i)}, 
+                                            RenameColumns(Split(Substitute(Mid(i, st, ed - st), "</th>",""), "<th>"), "Result", "Field")
+                                        ),
+                                    rows: MatchAll(i, "\<tr\>(?=\<td)(?<tr>.+?)(?=\<\/tr\>)\<\/tr\>", MatchOptions.Multiline)
+                                },
+                                With({colsCt: CountRows(cols), rowsCt: CountRows(rows)},
+                                    With({rcV:
+                                        Ungroup( 
+                                            ForAll(Sequence(rowsCt) As r, 
+                                                With({td: MatchAll(Index(rows, r.Value).tr, "\<td\/\>|\<td\>\s*(?<td>.+?)?(?=\s*\<\/td\>)\s*\<\/td\>", MatchOptions.Multiline)},
+                                                    {
+                                                        RW: r.Value, 
+                                                        CV: ForAll(Sequence(colsCt) As c, 
+                                                                {
+                                                                    COL: c.Value, 
+                                                                    FLD: Index(cols, c.Value).Field, 
+                                                                    VAL: With({vC: Index(td, c.Value).td}, If(vC <> "null", Substitute(Substitute(vC,"&lt;","<"),"&gt;",">")))
+                                                                }
+                                                            )
+                                                    }
+                                                )
+                                            ),
+                                            "CV"
+                                        )},
+                                        Collect(jsonObjDetails, rcV)
+                                    )
+                                )
+                            )
+                        ) 
+                    Size: =13
+                    Text: ="Parse JSON"
+                    Tooltip: =Self.Text
+                    ZIndex: =3
+
+            Container3_1 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =Parent.LayoutGap / 2
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =Self.LayoutGap / 2.5
+                PaddingLeft: =Self.PaddingBottom
+                PaddingRight: =Self.PaddingBottom
+                PaddingTop: =Self.PaddingBottom
+                ZIndex: =2
+
+                Label2_1 As label:
+                    AlignInContainer: =AlignInContainer.Center
+                    AutoHeight: =true
+                    Color: =RGBA(255, 255, 255, 1)
+                    Fill: =RGBA(102, 113, 166, 1)
+                    PaddingBottom: =Parent.LayoutGap
+                    PaddingLeft: =Self.PaddingBottom
+                    PaddingRight: =Self.PaddingBottom
+                    PaddingTop: =Self.PaddingBottom
+                    Text: |-
+                        ="Parsed JSON string:"
+                    Tooltip: =Self.Text
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                Gallery1 As gallery.galleryVertical:
+                    BorderThickness: =1
+                    FocusedBorderThickness: =Self.BorderThickness + 1
+                    Items: =jsonObjDetails
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    TemplatePadding: =20
+                    TemplateSize: =125
+                    WrapCount: =3
+                    ZIndex: =2
+
+                    Container4 As groupContainer.verticalAutoLayoutContainer:
+                        BorderColor: =RGBA(50, 86, 160, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(0, 0, 0, 0.15)
+                        Height: =Parent.TemplateHeight
+                        LayoutAlignItems: =LayoutAlignItems.Stretch
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutGap: =10
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingBottom: =Self.LayoutGap
+                        PaddingLeft: =Self.PaddingBottom
+                        PaddingRight: =Self.PaddingBottom
+                        Width: =Parent.TemplateWidth
+                        ZIndex: =1
+
+                        Label3 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            AutoHeight: =true
+                            Color: =RGBA(255, 255, 255, 1)
+                            Fill: =RGBA(50, 86, 160, 1)
+                            FontWeight: =FontWeight.Semibold
+                            PaddingBottom: =Parent.LayoutGap
+                            PaddingLeft: =Self.PaddingBottom
+                            PaddingRight: =Self.PaddingBottom
+                            PaddingTop: =Self.PaddingBottom
+                            Size: =11
+                            Text: =$"{ThisItem.COL}. {ThisItem.FLD}"
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                        TextInput2 As text:
+                            BorderStyle: =If(ThisItem.IsSelected, BorderStyle.Solid, BorderStyle.None)
+                            BorderThickness: =1
+                            Default: =ThisItem.VAL
+                            Fill: =RGBA(255, 255, 255, If(ThisItem.IsSelected, 1, 0))
+                            FillPortions: =1
+                            FocusedBorderThickness: =Self.BorderThickness + 1
+                            LayoutMinWidth: =Parent.Width - (2 * Parent.PaddingBottom)
+                            Mode: =TextMode.MultiLine
+                            PaddingLeft: =5
+                            Size: =10
+                            Tooltip: =Self.Text
+                            VirtualKeyboardMode: =VirtualKeyboardMode.Text
+                            ZIndex: =2
+

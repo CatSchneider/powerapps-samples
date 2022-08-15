@@ -1,0 +1,51 @@
+{
+  "22423299-f114-418e-a579-7eee332b08f6": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "displayName": "Office 365 Users",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1587/1.0.1587.2924/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users"
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Users"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "22423299-f114-418e-a579-7eee332b08f6"
+  },
+  "54f330ba-d207-499c-a9e6-0c8edb143dcc": {
+    "connectionParameters": {
+      "workFlowCallbackUri": "https://prod-98.westus.logic.azure.com:443/workflows/86a8087a39a54511af72102dcdf9a752/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-D3MT2i04LOycdNPTfyXnyTxsozcTQV3Vxx03JKmXwU",
+      "workflowEndpoint": "/subscriptions/be4c2756-6fa8-4d1b-91ba-70dc75410b5a/resourceGroups/0f63e03320d7475ab83bc2ad456ea8e2-a1c566a8aca040e68d9dc97e9d8dacb2/providers/Microsoft.Logic/workflows/715d26a6-1494-4b22-8551-ddfb26c0a7a7",
+      "workflowName": "715d26a6-1494-4b22-8551-ddfb26c0a7a7",
+      "workflowPath": "/subscriptions/be4c2756-6fa8-4d1b-91ba-70dc75410b5a/resourceGroups/0f63e03320d7475ab83bc2ad456ea8e2-a1c566a8aca040e68d9dc97e9d8dacb2/providers/Microsoft.Logic/workflows/715d26a6-1494-4b22-8551-ddfb26c0a7a7"
+    },
+    "connectionRef": {
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "715d26a6-1494-4b22-8551-ddfb26c0a7a7"
+        }
+      },
+      "parameterHintsV2": {
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "715d26a6-1494-4b22-8551-ddfb26c0a7a7"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "PowerAppsJSONParser"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "54f330ba-d207-499c-a9e6-0c8edb143dcc"
+  }
+}
